@@ -1,157 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks</title>
-    <style>
-        /* Dark mode styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #bb86fc;
-        }
-
-        input[type="text"],
-        input[type="datetime-local"] {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: none;
-            background-color: #333;
-            color: #e0e0e0;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #6200ee;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        button:hover {
-            background-color: #bb86fc;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .task-description {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .task-complete {
-            text-decoration: line-through;
-        }
-
-        .delete-button {
-            background-color: #cf6679;
-        }
-
-        .delete-button:hover {
-            background-color: #ff7961;
-        }
-    </style>
+    <title>Отображение даты</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <h1>Tasks</h1>
+    <div class="tabs">
+        <div class="tab active" id="tasksTab">Задачи</div>
+        <div class="tab" id="chatsTab">Чаты</div>
+    </div>
+    <div class="container">
+        <span class="buttons">
+            <span class="date">Суббота, 8 июня</span>
+            <div>
+                <button class="btnm" id="prevBtn">&larr;</button><br/>
+                <button class="btnm" id="nextBtn">&rarr;</button>
+            </div>
+            <div class="manual-select" id="manualSelect">&#128197;</div>
+        </span>
 
-    <form id="task-form">
-        <label for="task-date">Date & Time:</label><br>
-        <input type="datetime-local" id="task-date" name="task-date"><br>
-        <label for="task-description">Description:</label><br>
-        <input type="text" id="task-description" name="task-description"><br>
-        <button type="submit">Add Task</button>
-    </form>
-
-    <ul id="task-list"></ul>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const taskForm = document.getElementById('task-form');
-            const taskList = document.getElementById('task-list');
-
-            // Load tasks from localStorage
-            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-            // Render tasks
-            function renderTasks() {
-                taskList.innerHTML = '';
-                tasks.forEach((task, index) => {
-                    const taskElement = document.createElement('li');
-                    taskElement.innerHTML = `
-                        <input type="checkbox" class="task-checkbox" data-index="${index}" ${task.completed ? 'checked' : ''}>
-                        <div class="task-description ${task.completed ? 'task-complete' : ''}">${task.description}</div>
-                        <button class="delete-button" data-index="${index}">Delete</button>
-                    `;
-                    taskList.appendChild(taskElement);
-                });
-            }
-
-            // Save tasks to localStorage
-            function saveTasks() {
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-            }
-
-            // Add task
-            taskForm.addEventListener('submit', function (event) {
-                event.preventDefault();
-                const taskDate = document.getElementById('task-date').value;
-                const taskDescription = document.getElementById('task-description').value;
-                if (taskDate && taskDescription) {
-                    tasks.push({ date: taskDate, description: taskDescription, completed: false });
-                    saveTasks();
-                    renderTasks();
-                    taskForm.reset();
-                } else {
-                    alert('Please enter date and description for the task.');
-                }
-            });
-
-            // Toggle task completion
-            taskList.addEventListener('change', function (event) {
-                if (event.target.classList.contains('task-checkbox')) {
-                    const index = event.target.dataset.index;
-                    tasks[index].completed = event.target.checked;
-                    saveTasks();
-                    renderTasks();
-                }
-            });
-
-            // Delete task
-            taskList.addEventListener('click', function (event) {
-                if (event.target.classList.contains('delete-button')) {
-                    const index = event.target.dataset.index;
-                    tasks.splice(index, 1);
-                    saveTasks();
-                    renderTasks();
-                }
-            });
-
-            // Render initial tasks
-            renderTasks();
-        });
-    </script>
+        <div class="help-panel" id="helpPanel">
+            <h2>Как работает программа добавления задачи</h2>
+            <p>Описание работы программы...</p>
+        </div>
+    </div>
+    <hr class="hr-class"/>
+    <div class="date-picker-panel" id="datePickerPanel">
+        <span class="date-picker-close" id="datePickerClose">&times;</span>
+        <input type="date" id="datePicker" style="width: 100%; padding: 10px; font-size: 18px;">
+    </div>
+    <div class="add-task">
+        <input type="text" id="taskInput" placeholder="Добавить задачу">
+        <div class="add-icon" id="addTaskButton">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
+    <ul id="taskList"></ul>
+    <div class="task-options-panel" id="taskOptionsPanel">
+        <button id="markComplete">Выполнено</button>
+        <button id="duplicateTask">Дублировать</button>
+        <button id="moveNextDay">На следующий день</button>
+        <button id="moveToDate">На другую дату</button>
+        <button id="deleteTask" class="delete">Удалить задачу</button>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>
