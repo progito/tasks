@@ -119,17 +119,30 @@ function addTask() {
     const taskItem = createTaskItem(taskText);
     taskList.appendChild(taskItem);
 
+    // Проверяем наличие времени в тексте задачи и выделяем его
+    const timePattern = /\b([01]?[0-9]|2[0-3]):[0-5][0-9]\b/g;
+    const matches = taskText.match(timePattern);
+    if (matches) {
+        matches.forEach(match => {
+            const startIndex = taskText.indexOf(match);
+            const endIndex = startIndex + match.length;
+            const highlightedText = `<span class="time-highlight">${match}</span>`;
+            taskItem.querySelector('.task-text').innerHTML = taskText.slice(0, startIndex) + highlightedText + taskText.slice(endIndex);
+        });
+    }
+
+    // Добавляем задачу к списку и сохраняем в localStorage
     const currentDate = parseDateString(dateElement.textContent);
     const formattedDate = formatDateShort(currentDate);
-
     if (!tasksByDate[formattedDate]) {
         tasksByDate[formattedDate] = [];
     }
     tasksByDate[formattedDate].push(taskText);
     localStorage.setItem('tasksByDate', JSON.stringify(tasksByDate));
-    
+
     taskInput.value = '';
 }
+
 
 
 
@@ -212,6 +225,7 @@ function moveToAnotherDate(taskText, newDate) {
 }
 
 // Функция для создания элемента задачи
+// Функция для создания элемента задачи
 function createTaskItem(taskText) {
     const taskItem = document.createElement('li');
     taskItem.classList.add('task-item');
@@ -224,6 +238,15 @@ function createTaskItem(taskText) {
     const checkbox = taskItem.querySelector('.task-checkbox');
     const taskTextElement = taskItem.querySelector('.task-text');
     const taskOptions = taskItem.querySelector('.task-options');
+
+    // Добавляем обработчик события клика по задаче для выделения
+    taskItem.addEventListener('click', () => {
+        if (selectedTaskItem) {
+            selectedTaskItem.classList.remove('selected');
+        }
+        taskItem.classList.add('selected');
+        selectedTaskItem = taskItem;
+    });
 
     checkbox.addEventListener('click', () => {
         taskItem.classList.toggle('completed');
@@ -248,6 +271,7 @@ function createTaskItem(taskText) {
 
     return taskItem;
 }
+
 
 // Функция для сохранения задач в LocalStorage
 function saveTasksToLocalStorage() {

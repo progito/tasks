@@ -37,7 +37,7 @@ body {
 }
 
 .tab.active {
-    color: blue;
+    color: #007bff;
 }
 
 .tab.active::after {
@@ -47,11 +47,11 @@ body {
     left: 0;
     right: 0;
     height: 3px;
-    background-color: blue;
+    background-color: #007bff;
 }
 
 .date {
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 20px;
 }
 
@@ -83,7 +83,7 @@ button {
     border: 1px solid #ccc;
     border-radius: 10px 10px 0 0;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 20px 3px rgb(65 99 132 / 45%);
     transition: bottom 0.3s ease;
     height: 50%;
     z-index: 1000;
@@ -117,26 +117,32 @@ button {
     border-top: 0.5px solid rgba(243, 243, 243, 0.258);
 }
 
+
+
+
 .add-task {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 15px 10px;
-    background-color: #fff;
-    border-top: 1px solid #ccc;
     display: flex;
-    justify-content: center;
     align-items: center;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
-.add-task input {
-    width: 90%;
-    padding: 10px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.add-icon {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#taskInput {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    font-size: 16px;
+    flex: 1;
+}
+
+#taskInput:focus {
+    outline: none;
+    border-bottom: 2px solid #007bff; /* Цвет фокуса */
 }
 
 .add-icon {
@@ -244,10 +250,11 @@ ul#taskList {
     border: 1px solid #ccc;
     border-radius: 10px 10px 0 0;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 20px 3px rgb(65 99 132 / 45%);
     transition: bottom 0.3s ease;
     z-index: 1000;
     display: flex;
+    border: none;
     flex-direction: column;
     gap: 10px;
 }

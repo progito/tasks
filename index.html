@@ -37,14 +37,11 @@
     <hr class="hr-class"/>
     <div class="date-picker-panel" id="datePickerPanel">
         <span class="date-picker-close" id="datePickerClose">&times;</span>
+        <br/>
+        <p>выберите дату:</p>
         <input type="date" id="datePicker" style="width: 100%; padding: 10px; font-size: 18px;">
     </div>
-    <div class="add-task">
-        <input type="text" id="taskInput" placeholder="Добавить задачу">
-        <div class="add-icon" id="addTaskButton">
-            <i class="fas fa-plus"></i>
-        </div>
-    </div>
+    
     <ul id="taskList"></ul>
     <div class="task-options-panel" id="taskOptionsPanel">
         <span class="task-options-close" id="taskOptionsClose">&times;</span>
@@ -53,6 +50,13 @@
         <button id="moveNextDay">На следующий день</button>
         <button id="moveToDate">На другую дату</button>
         <button id="deleteTask" class="delete">Удалить задачу</button>
+    </div>
+    <div class="add-task">
+        <div class="add-icon" id="addTaskButton">
+            <i class="fas fa-plus"></i>
+        </div>
+        <input type="text" id="taskInput" placeholder="Добавить задачу">
+        
     </div>
     <div class="chats-panel" id="chatsPanel" style="display: none;">
         <h1>Chats</h1>
