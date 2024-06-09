@@ -269,4 +269,44 @@ ul#taskList {
 .task-options-panel.active {
     bottom: 0;
 }
+/* Стили для меню */
+.menu-icon {
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: auto;
+    padding: 10px;
+}
+
+.task-date-panel {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: left 0.3s;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.task-date-panel.active {
+    left: 0;
+}
+
+#taskDatesList {
+    list-style: none;
+    padding: 0;
+}
+
+#taskDatesList li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+#taskDatesList li:hover {
+    background-color: #f0f0f0;
+}
 

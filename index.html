@@ -11,6 +11,7 @@
     <div class="tabs">
         <div class="tab active" id="tasksTab">Задачи</div>
         <div class="tab" id="chatsTab">Чаты</div>
+        <div class="menu-icon" id="menuButton">&#9776;</div>
     </div>
     <div class="container">
         <span class="buttons">
@@ -20,7 +21,13 @@
                 <button class="btnm" id="nextBtn">&rarr;</button>
             </div>
             <div class="manual-select" id="manualSelect">&#128197;</div>
+            
         </span>
+
+        <div class="task-date-panel" id="taskDatePanel">
+            <span class="task-date-close" id="taskDateClose">&times;</span>
+            <ul id="taskDatesList"></ul>
+        </div>
 
         <div class="help-panel" id="helpPanel">
             <h2>Как работает программа добавления задачи</h2>
@@ -40,11 +47,15 @@
     </div>
     <ul id="taskList"></ul>
     <div class="task-options-panel" id="taskOptionsPanel">
+        <span class="task-options-close" id="taskOptionsClose">&times;</span>
         <button id="markComplete">Выполнено</button>
         <button id="duplicateTask">Дублировать</button>
         <button id="moveNextDay">На следующий день</button>
         <button id="moveToDate">На другую дату</button>
         <button id="deleteTask" class="delete">Удалить задачу</button>
+    </div>
+    <div class="chats-panel" id="chatsPanel" style="display: none;">
+        <h1>Chats</h1>
     </div>
     <script src="script.js"></script>
 </body>
